@@ -11,3 +11,9 @@ Game.prototype.draw = function(){
 Game.prototype.update = function(){
   //game logic goes here                                                                                            
 };
+
+function loop(game){
+  game.update();
+  game.draw();
+  requestAnimationFrame(function(){loop(game);});
+};
