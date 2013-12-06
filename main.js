@@ -11,18 +11,26 @@ if ( elem && elem.getContext ) {
   if ( context ) {
     
     //Create new Game Object
-    var game = new Game(elem.width, elem.height);
-    var rectX = 0;                       
+    var game = new Game(elem.width, elem.height);             
+    var pj = new Primitive.Rectangle(0, 0, 10, 10);
+    pj.setColor("rgb(200,100,0)");
+    var pj2 = new Primitive.Rectangle(5, 20, 10, 10);
+    pj2.setColor("rgb(0,200,0)");
     
     game.draw = function(){
-      context.fillStyle="#FFFFFF";
+      
+	    //clear the screen
+	    context.fillStyle="#FFFFFF";
       context.fillRect( 0, 0, game.width, game.height );
-      context.fillStyle="#FF0000";
-      context.fillRect( rectX, 0, 10, 10 );
+        
+	    //paints some figures
+	    pj.draw(context);
+	    pj2.draw(context);
     };
     
     game.update = function(){
-      rectX = rectX+1;
+      pj.setX(pj.getX()+1);
+      pj2.setX(pj2.getX()+1);
     };
     
     loop(game);

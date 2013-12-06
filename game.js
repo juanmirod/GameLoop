@@ -17,3 +17,5 @@ function loop(game){
   game.draw();
   requestAnimationFrame(function(){loop(game);});
 };
+
+console.log("Game loaded...")
