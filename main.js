@@ -29,8 +29,8 @@ if ( elem && elem.getContext ) {
     };
     
     game.update = function(){
-      pj.setX(pj.getX()+1);
-      pj2.setX(pj2.getX()+1);
+      pj.x += 1;
+      pj2.x += 2;
     };
     
     loop(game);
