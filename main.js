@@ -8,6 +8,11 @@ function addSide(){
   polygon.numSides++;
   polygon.update();
 }
+
+function rotateAngle(){
+  polygon.rotateAngle += 10;
+  polygon.update();
+}
   
 // Always check for properties and methods, to make sure your code doesn't break 
 // in other browsers.

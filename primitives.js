@@ -39,24 +39,29 @@ var Primitive = (function() {
     // A Polygon is a closed path that draws a regular polygon of N sides
     Polygon: function(x, y, size, numSides){
       
-      var color     = "rgb(0,250,0)";
-      var colorFill = "rgb(200,250,200)";
-      var lineWidth = "3";
+      var color       = "rgb(0,250,0)"
+        , colorFill   = "rgb(200,250,200)"
+        , lineWidth   = "3";
+        
       
       var updatePoints = function(){
         var angle   = deg2rad(360/pub.numSides);
         pub.points  = []; 
         for(var i=0; i<pub.numSides; i++){
-          pub.points[i] = {x: pub.x+(Math.cos(angle*i)*pub.size), y: pub.y+(Math.sin(angle*i)*pub.size) }
+          pub.points[i] = {
+            x: pub.x+(Math.cos(pub.rotateAngle+angle*i)*pub.size), 
+            y: pub.y-(Math.sin(pub.rotateAngle+angle*i)*pub.size) 
+          };
         }
       };
       
-      var pub = {};
-      
-      pub.x = x;
-      pub.y = y;
-      pub.size = size;
-      pub.numSides = numSides;
+      var pub = {
+        x: x,
+        y: y,
+        size: size,
+        numSides: numSides,
+        rotateAngle: 0
+      };
       
       pub.draw = function(ctx){
         ctx.strokeStyle = color;
@@ -74,7 +79,10 @@ var Primitive = (function() {
           ctx.lineTo(pub.points[0].x, pub.points[0].y);        
           ctx.stroke();
         }
-        if(debugON) ctx.fillRect(pub.x-1, pub.y-1, 2, 2);
+        if(debugON){
+          ctx.fillStyle = "red";
+          ctx.fillRect(pub.x-1, pub.y-1, 2, 2);
+        }
       };
       
       pub.setColor = function (newColor){
