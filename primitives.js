@@ -46,11 +46,12 @@ var Primitive = (function() {
       
       var updatePoints = function(){
         var angle   = deg2rad(360/pub.numSides);
+        var initAngle = deg2rad(pub.rotateAngle);
         pub.points  = []; 
         for(var i=0; i<pub.numSides; i++){
           pub.points[i] = {
-            x: pub.x+(Math.cos(pub.rotateAngle+angle*i)*pub.size), 
-            y: pub.y-(Math.sin(pub.rotateAngle+angle*i)*pub.size) 
+            x: pub.x+(Math.cos(initAngle+angle*i)*pub.size), 
+            y: pub.y+(Math.sin(initAngle+angle*i)*pub.size) 
           };
         }
       };

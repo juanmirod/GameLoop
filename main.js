@@ -10,7 +10,7 @@ function addSide(){
 }
 
 function rotateAngle(){
-  polygon.rotateAngle += 10;
+  polygon.rotateAngle += 1;
   polygon.update();
 }
   
@@ -48,6 +48,7 @@ if ( elem && elem.getContext ) {
     game.update = function(){
       pj.x += 1;
       pj2.x += 2;
+      rotateAngle();
     };
     
     loop(game);
