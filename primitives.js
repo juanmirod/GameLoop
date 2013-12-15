@@ -39,7 +39,9 @@ var Primitive = (function() {
     // A Polygon is a closed path that draws a regular polygon of N sides
     Polygon: function(x, y, size, numSides){
       
-      var color = "rgb(0,250,0)";
+      var color     = "rgb(0,250,0)";
+      var colorFill = "rgb(200,250,200)";
+      var lineWidth = "3";
       
       var updatePoints = function(){
         var angle   = deg2rad(360/pub.numSides);
@@ -58,7 +60,8 @@ var Primitive = (function() {
       
       pub.draw = function(ctx){
         ctx.strokeStyle = color;
-        ctx.lineWidth   = "5";
+        ctx.lineWidth   = lineWidth;
+        ctx.fillStyle   = colorFill;
         ctx.beginPath();
         for(var index in pub.points){        
           if(index == 0)
@@ -66,8 +69,11 @@ var Primitive = (function() {
           else
             ctx.lineTo(pub.points[index].x, pub.points[index].y);            
         }
-        ctx.lineTo(pub.points[0].x, pub.points[0].y);        
-        ctx.stroke();
+        ctx.fill();
+        if(lineWidth > 0){
+          ctx.lineTo(pub.points[0].x, pub.points[0].y);        
+          ctx.stroke();
+        }
         if(debugON) ctx.fillRect(pub.x-1, pub.y-1, 2, 2);
       };
       
