@@ -2,7 +2,7 @@
 
 var elem = document.getElementById('myCanvas')
   , polygon
-  , debugON = true;
+  , debugON = false;
   
 function addSide(){
   polygon.numSides++;
@@ -31,7 +31,7 @@ if ( elem && elem.getContext ) {
     var pj2 = new Primitive.Rectangle(5, 20, 10, 10);
     pj2.setColor("rgb(0,200,0)");
     
-    polygon = new Primitive.Polygon(100, 100, 50, 5);
+    polygon = new Primitive.Polygon(100, 100, 50, 3);
     
     game.draw = function(){
       
