@@ -1,5 +1,8 @@
-var Hello = "Hello";
-console.log(Hello);
+/*TODO: need to refactor this to be more readable and easier to modify in the future.
+  I don't like this pattern with inheritance all nested in the same place. 
+  Maybe is better just to use the prototype pattern and use this when needed.
+*/
+
 
 var Primitive = (function() {
 
@@ -10,6 +13,10 @@ var Primitive = (function() {
     
   //exposed properties    
   return {
+    
+    // opacity defines if the object is drawable or hidden
+    var opacity = 1;
+  
     // A Rectangle is an encapsulation of the canvas.fill to draw rectagles
     Rectangle: function(x, y, width, height){
       
