@@ -26,10 +26,10 @@ if ( elem && elem.getContext ) {
     var game = new Game(elem.width, elem.height);             
     
     var pj = new Primitive.Rectangle(0, 0, 10, 10);
-    pj.setColor("rgb(200,100,0)");
+    pj.color = "rgb(200,100,0)";
     
     var pj2 = new Primitive.Rectangle(5, 20, 10, 10);
-    pj2.setColor("rgb(0,200,0)");
+    pj2.color = "rgb(0,200,0)";
     
     polygon = new Primitive.Polygon(100, 100, 50, 3);
     
