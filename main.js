@@ -1,8 +1,6 @@
 // Get a reference to the element.
-
 var elem = document.getElementById('myCanvas')
-  , polygon
-  , debugON = false;
+  , polygon;
   
 function addSide(){
   polygon.numSides++;

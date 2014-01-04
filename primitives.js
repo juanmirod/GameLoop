@@ -1,7 +1,3 @@
-/*TODO: need to refactor this to be more readable and easier to modify in the future.
-  I don't like this pattern with inheritance all nested in the same place. 
-  Maybe is better just to use the prototype pattern and use this when needed.
-*/
 var Primitive = Primitive || {};
 
 (function ( Primitive ) {
