@@ -6,7 +6,7 @@ var Primitive = Primitive || {};
 
 (function ( Primitive ) {
 
-  var Base, Rectangle, Polygon;
+  var Rectangle, Polygon;
   
   //private scope of this module
   function deg2rad(ang) {
@@ -46,18 +46,17 @@ var Primitive = Primitive || {};
     
   }
   
-  
   Polygon.prototype.update = function(){
-      var angle   = deg2rad(360/this.numSides);
-      var initAngle = deg2rad(this.rotateAngle);
-      this.points  = []; 
-      for(var i=0; i < this.numSides; i++){
-        this.points[i] = {
-          x: this.x+(Math.cos(initAngle+angle*i)*this.size), 
-          y: this.y+(Math.sin(initAngle+angle*i)*this.size) 
-        };
-      }
-    };
+    var angle   = deg2rad(360/this.numSides);
+    var initAngle = deg2rad(this.rotateAngle);
+    this.points  = []; 
+    for(var i=0; i < this.numSides; i++){
+      this.points[i] = {
+        x: this.x+(Math.cos(initAngle+angle*i)*this.size), 
+        y: this.y+(Math.sin(initAngle+angle*i)*this.size) 
+      };
+    }
+  };
   
   Polygon.prototype.draw = function(ctx){
     ctx.strokeStyle = this.color;
@@ -81,7 +80,7 @@ var Primitive = Primitive || {};
     }
   }
   
-  Primitive.Base = Base;
+  // exports 
   Primitive.Rectangle = Rectangle;
   Primitive.Polygon = Polygon;
 
