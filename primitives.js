@@ -9,7 +9,7 @@ var Primitive = Primitive || {};
       return ang * (Math.PI/180.0);
   }
   
-  // A Rectangle is an encapsulation of the canvas.fill to draw rectagles
+  // A Rectangle is an encapsulation of the canvas.fill
   Rectangle = function (x, y, width, height){
     
     // private properties
