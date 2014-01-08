@@ -17,7 +17,7 @@ function rotateAngle(){
 if ( elem && elem.getContext ) {
   // Get the 2d context.
   // Remember: you can only initialize one context per element.
-  var context = elem.getContext( '2d' );
+  window.context = elem.getContext( '2d' );
   if ( context ) {
     
     //Create new Game Object
@@ -31,6 +31,9 @@ if ( elem && elem.getContext ) {
     
     polygon = new Primitive.Polygon(100, 100, 50, 3);
     
+    window.map = new TileMap.Map(10, 10, 32);
+    window.map.loadTilePalette();
+    
     game.draw = function(){
       
 	    //clear the screen
@@ -38,6 +41,7 @@ if ( elem && elem.getContext ) {
       context.fillRect( 0, 0, game.width, game.height );
         
 	    //paints some figures
+	    window.map.draw(context);
 	    pj.draw(context);
 	    pj2.draw(context);
 	    polygon.draw(context);
