@@ -31,7 +31,7 @@ if ( elem && elem.getContext ) {
     
     polygon = new Primitive.Polygon(100, 100, 50, 3);
     
-    window.map = new TileMap.Map(10, 10, 32);
+    window.map = new TileMap.Map(10, 10);
     window.map.loadTilePalette();
     
     game.draw = function(){

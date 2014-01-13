@@ -8,8 +8,8 @@ var TileMap = TileMap || {};
 
 (function ( Map ) {
 
-  var defaultTilePalette  = ['http://placehold.it/32/00dd00', 'http://placehold.it/32/aa6600'];
-  var defaultTileWidth    = 32;
+  var defaultTilePalette  = ['http://placehold.it/64/00dd00', 'http://placehold.it/64/aa6600'];
+  var defaultTileWidth    = 64;
 
   Map = function(width, height, tileWidth){
     this.tileWidth    = typeof tileWidth !== 'undefined' ? tileWidth : defaultTileWidth;
@@ -61,15 +61,14 @@ var TileMap = TileMap || {};
       var view = this.getViewport(ctx.canvas.width, ctx.canvas.height);
       // paint tiles inside the viewport 
       // (really really rought, needs refactoring and optimization)
-      var x = view.x + this.camera.x;
-      var y = view.y + this.camera.y;
+
       for(var i=0; i < this.width; i++){
         for(var j=0; j< this.height; j++){
           if(typeof this.tilePaletteImg[this.map[i][j]] != 'undefined'){            
             ctx.drawImage(
               this.tilePaletteImg[this.map[i][j]], 
-              x+i*this.tileWidth, 
-              y+j*this.tileWidth
+              view.x+i*this.tileWidth, 
+              view.y+j*this.tileWidth
             );
           }
         }
