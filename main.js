@@ -1,17 +1,25 @@
 // Get a reference to the element.
 var elem = document.getElementById('myCanvas')
-  , polygon;
-  
-function addSide(){
-  polygon.numSides++;
-  polygon.update();
-}
+  , map = new TileMap.Map(10, 10);
 
-function rotateAngle(){
-  polygon.rotateAngle += 1;
-  polygon.update();
-}
-  
+//TODO: put this in a separate module
+document.addEventListener('keydown', function(event) {
+  switch(event.keyCode){
+    case 37:  // LEFT
+      map.camera.x+=5; 
+      break;
+    case 39: // RIGHT
+      map.camera.x-=5;
+      break;    
+    case 38: // UP
+      map.camera.y+=5;
+      break;    
+    case 40: // DOWN
+      map.camera.y-=5;
+      break;    
+  }
+});
+
 // Always check for properties and methods, to make sure your code doesn't break 
 // in other browsers.
 if ( elem && elem.getContext ) {
@@ -23,16 +31,7 @@ if ( elem && elem.getContext ) {
     //Create new Game Object
     var game = new Game(elem.width, elem.height);             
     
-    var pj = new Primitive.Rectangle(0, 0, 10, 10);
-    pj.color = "rgb(200,100,0)";
-    
-    var pj2 = new Primitive.Rectangle(5, 20, 10, 10);
-    pj2.color = "rgb(0,200,0)";
-    
-    polygon = new Primitive.Polygon(100, 100, 50, 3);
-    
-    window.map = new TileMap.Map(10, 10);
-    window.map.loadTilePalette();
+    map.loadTilePalette();
     
     game.draw = function(){
       
@@ -41,16 +40,7 @@ if ( elem && elem.getContext ) {
       context.fillRect( 0, 0, game.width, game.height );
         
 	    //paints some figures
-	    window.map.draw(context);
-	    pj.draw(context);
-	    pj2.draw(context);
-	    polygon.draw(context);
-    };
-    
-    game.update = function(){
-      pj.x += 1;
-      pj2.x += 2;
-      rotateAngle();
+	    map.draw(context);
     };
     
     loop(game);

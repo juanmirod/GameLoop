@@ -61,7 +61,6 @@ var TileMap = TileMap || {};
       var view = this.getViewport(ctx.canvas.width, ctx.canvas.height);
       // paint tiles inside the viewport 
       // (really really rought, needs refactoring and optimization)
-
       for(var i=0; i < this.width; i++){
         for(var j=0; j< this.height; j++){
           if(typeof this.tilePaletteImg[this.map[i][j]] != 'undefined'){            
