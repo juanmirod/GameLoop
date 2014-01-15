@@ -6,10 +6,10 @@ GameLoop is just the bare-minimun helpers that **I** need to build a game in Can
 
 In development / TODO:
 
-- [ ] Complete Primitives module to include circles and lines.
-- [ ] Complete TileMap module with different layers, interaction matrix, an improved drawing method and objects. 
-- [ ] Sprite module to be able to draw animated sprites.
-- [ ] Interaction Module to manage keyboard and mouse events.
+- Complete Primitives module to include circles and lines.
+- Complete TileMap module with different layers, interaction matrix, an improved drawing method and objects. 
+- Sprite module to be able to draw animated sprites.
+- Interaction Module to manage keyboard and mouse events.
 - More stuff to come...
 
 Warning! Disclaimer: This is just a sandbox to learn javascript and try to get a game from scratch.
