@@ -35,7 +35,7 @@ if ( elem && elem.getContext ) {
     
     game.assets.push(map);
     
-    loop(game, ctx);
+    loop(game, context);
     
   }
   

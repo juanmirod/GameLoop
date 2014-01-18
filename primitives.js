@@ -11,14 +11,12 @@ var Primitive = Primitive || {};
   
   // A Rectangle is an encapsulation of the canvas.fill
   Rectangle = function (x, y, width, height){
-    
     this.color = "rgb(200,0,0)";
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    
-    return this;    
+    this.opacity = 1;
   }
     
   Rectangle.prototype.draw = function(ctx) {
@@ -34,6 +32,7 @@ var Primitive = Primitive || {};
     this.lineWidth = "3";
     this.color = "rgb(100,250,250)";
     this.colorFill = "rgb(50, 200, 200)";
+    this.opacity = 1;
   }            
   
   Circle.prototype.draw = function(ctx) {
@@ -54,17 +53,14 @@ var Primitive = Primitive || {};
     
   // A Polygon is a closed path that draws a regular polygon of N sides
   Polygon = function(x, y, size, numSides) {
-    
     this.colorFill   = "rgb(200,250,200)"
     this.lineWidth   = "3";
-    
     this.color = "rgb(150,200,150)";
     this.x = x;
     this.y = y;    
     this.size = size;
     this.numSides = numSides;
-    this.rotateAngle = 0;
-    
+    this.rotateAngle = 0; 
   }
   
   Polygon.prototype.update = function(){
