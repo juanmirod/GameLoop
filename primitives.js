@@ -39,6 +39,7 @@ var Primitive = Primitive || {};
     this.size = size;
     this.numSides = numSides;
     this.rotateAngle = 0;
+    this.opacity = 1;
     
   }
   
