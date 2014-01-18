@@ -25,7 +25,8 @@ if ( elem && elem.getContext ) {
   if ( context ) {
     
     // Create new Game Object
-    var game = new Game(elem.width, elem.height);             
+    var game = new Game(elem.width, elem.height); 
+    game.backgroundColor = '#150525';            
     
     // Create a random Level: full the screen with primitives
     for(var i=0; i<50; i++){

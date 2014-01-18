@@ -30,10 +30,10 @@ var Primitive = Primitive || {};
   // A Polygon is a closed path that draws a regular polygon of N sides
   Polygon = function(x, y, size, numSides) {
     
-    this.colorFill   = "rgb(200,250,200)"
+    this.colorFill   = "rgb(150,000,30)"
     this.lineWidth   = "3";
     
-    this.color = "rgb(150,200,150)";
+    this.color = "rgb(250,000,000)";
     this.x = x;
     this.y = y;    
     this.size = size;
