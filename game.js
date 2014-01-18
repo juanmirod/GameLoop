@@ -26,11 +26,11 @@ Game.prototype.checkState = function(){
   // Check the state of the game and update to a new state if needed
 }
 
-function loop(game){
+function loop(game, ctx){
   game.checkState();
   game.update();
-  game.draw();
-  requestAnimationFrame(function(){loop(game);});
+  game.draw(ctx);
+  requestAnimationFrame(function(){loop(game, ctx);});
 }
 
 console.log("Game loaded...")
