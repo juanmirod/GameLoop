@@ -34,6 +34,7 @@ if ( elem && elem.getContext ) {
     map.loadTilePalette();
     
     game.assets.push(map);
+    game.assets.push(new Primitive.Circle(50, 50, 20));
     
     loop(game, context);
     

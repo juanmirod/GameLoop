@@ -40,7 +40,7 @@ var Primitive = Primitive || {};
     ctx.lineWidth   = this.lineWidth;
     ctx.fillStyle   = this.colorFill;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, 2*PI);
+    ctx.arc(this.x, this.y, this.r, 0, 2*Math.PI);
     ctx.fill();
     if(this.lineWidth > 0){
       ctx.stroke();
@@ -100,6 +100,7 @@ var Primitive = Primitive || {};
   // exports 
   Primitive.Rectangle = Rectangle;
   Primitive.Polygon = Polygon;
+  Primitive.Circle = Circle;
 
 })( Primitive );
 
