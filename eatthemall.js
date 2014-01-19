@@ -29,7 +29,7 @@ var Enemy = function(x, y, size){
 }
 
 Enemy.prototype.updateColor = function(playerSize){
-  if(this.shape.r > playerSize){
+  if(this.shape.r >= playerSize){
     this.shape.color = 'rgb(250, 10, 10)';
     this.shape.colorFill = 'rgb(200, 10, 10)';
   } else {
@@ -46,8 +46,10 @@ Enemy.prototype.searchFood = function(){
   var self = this;
   for(var i=0; i<enemies.length; i++){
     if(enemies[i] != null && self.collide(enemies[i])){
-      self.eat(enemies[i]);
-      enemies[i] = null;
+      if(self.shape.r > enemies[i].shape.r){ //don't eat things bigger than you!
+        self.eat(enemies[i]);
+        enemies[i] = null;
+      }
     }  
   }
 }
