@@ -1,5 +1,6 @@
 // Get a reference to the element.
-var elem = document.getElementById('myCanvas');
+var elem = document.getElementById('myCanvas'),
+    enemies = [];
 
 //TODO: put this in a separate module
 document.addEventListener('keydown', function(event) {
@@ -19,22 +20,79 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+// An enemy is a circle that changes color accordingly to the user size
+// and its own size. It also can eat other enemies and the user
+var Enemy = function(x, y, size){
+  this.shape = new Primitive.Circle(x, y, size);
+  this.opacity = 1; //make it visible
+}
+
+Enemy.prototype.updateColor = function(playerSize){
+  if(this.shape.r > playerSize){
+    this.shape.color = 'rgb(250, 10, 10)';
+    this.shape.fillColor = 'rgb(200, 10, 10)';
+  } else {
+    this.shape.color = 'rgb(10, 250, 10)';
+    this.shape.fillColor = 'rgb(10, 200, 10)';
+  }
+}
+
+Enemy.prototype.draw = function(ctx){
+  this.shape.draw(ctx);
+}
+
+Enemy.prototype.searchFood = function(){
+  var self = this;
+  for(var i=0; i<enemies.length; i++){
+    if(enemies[i] != null && self.collide(enemies[i])){
+      console.log('COLLIDE!!');
+      self.eat(enemies[i]);
+      enemies[i] = null;
+    }  
+  }
+}
+
+Enemy.prototype.collide = function(pal){
+  var dx = this.shape.x - pal.shape.x;
+  var dy = this.shape.y - pal.shape.y;
+  var dist = this.shape.r + pal.shape.r;
+  
+  return (this != pal)
+    && (Math.abs(dx) < dist && Math.abs(dy) < dist) // this let us skip the multiplications if they are far away from each other
+    && (dx*dx + dy*dy <= dist*dist); 
+}
+
+Enemy.prototype.eat = function(food){
+  this.shape.r += food.shape.r;
+}
+
 if ( elem && elem.getContext ) {
   // Get the 2d context.
   window.context = elem.getContext( '2d' );
   if ( context ) {
     
     // Create new Game Object
-    var game = new Game(elem.width, elem.height); 
+    var game = new Game(elem.width, elem.height);
     game.backgroundColor = '#150525';            
-    
+        
     // Create a random Level: full the screen with primitives
     for(var i=0; i<50; i++){
-      game.assets.push(new Primitive.Circle(
+      enemies.push(new Enemy(
         Math.round(Math.random()*600), 
         Math.round(Math.random()*600), 
         Math.round(Math.random()*20+5)
       ));
+    }
+    
+    game.assets = enemies;
+        
+    // overwrite update function to call collision detection
+    game.update = function(){
+      for(var i=0; i < enemies.length && enemies[i] != null; i++){
+        enemies[i].searchFood();
+      }
+      enemies = enemies.filter(function(enemy){ return enemy != null; });
+      game.assets = enemies;
     }
         
     loop(game, context);
