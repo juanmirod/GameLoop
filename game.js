@@ -3,15 +3,15 @@ function Game(width, height){
   this.width  = width;
   this.height = height;
   this.assets = []; 
-  this.backgroundColor = "#FAFAFA";
+  this.backgroundColor = '#FAFAFA'
 }
 
 // This function draws every object that have been added to the Game in order
 // asset opacity can be set to 0 to hide the asset 
 Game.prototype.draw = function(ctx){
   //clear the screen
-	ctx.fillStyle=this.backgroundColor;
-  ctx.fillRect(0, 0, this.width, this.height);
+  ctx.fillStyle = this.backgroundColor;
+  ctx.fillRect(0, 0, this.width, this.height);  
   
   this.assets.forEach(function(asset){
     if(asset.opacity > 0) asset.draw(ctx);
@@ -23,7 +23,7 @@ Game.prototype.update = function(){
   // TODO: update only if needed, for this we need some kind of watcher or flag 
   // that tell us if we need to update this asset as the opacity for draw                                                                               
   this.assets.forEach(function(asset){
-    asset.update();
+    if(asset.update != undefined) asset.update();
   });
 }
 

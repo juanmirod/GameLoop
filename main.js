@@ -33,17 +33,10 @@ if ( elem && elem.getContext ) {
     
     map.loadTilePalette();
     
-    game.draw = function(){
-      
-	    //clear the screen
-	    context.fillStyle="#FAFAFA";
-      context.fillRect( 0, 0, game.width, game.height );
-        
-	    //paints some figures
-	    map.draw(context);
-    };
+    game.assets.push(map);
+    game.assets.push(new Primitive.Circle(50, 50, 20));
     
-    loop(game);
+    loop(game, context);
     
   }
   

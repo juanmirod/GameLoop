@@ -11,36 +11,57 @@ var Primitive = Primitive || {};
   
   // A Rectangle is an encapsulation of the canvas.fill
   Rectangle = function (x, y, width, height){
-    
-    // private properties
     this.color = "rgb(200,0,0)";
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    
-    return this;    
+    this.opacity = 1;
   }
     
   Rectangle.prototype.draw = function(ctx) {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
-  }                       
+  }         
+  
+  // A Circle is an encapsulation of the canvas.arc which always draws full circles
+  Circle = function (x, y, r){    
+    this.x = x;
+    this.y = y;
+    this.r = r; 
+    this.lineWidth = "3";
+    this.color = "rgb(100,250,250)";
+    this.colorFill = "rgb(50, 200, 200)";
+    this.opacity = 1;
+  }            
+  
+  Circle.prototype.draw = function(ctx) {
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth   = this.lineWidth;
+    ctx.fillStyle   = this.colorFill;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, 2*Math.PI);
+    ctx.fill();
+    if(this.lineWidth > 0){
+      ctx.stroke();
+    }
+    if(window.debug != undefined){
+      ctx.fillStyle = "red";
+      ctx.fillRect(this.x-1, this.y-1, 2, 2);
+    }
+  }    
     
   // A Polygon is a closed path that draws a regular polygon of N sides
   Polygon = function(x, y, size, numSides) {
-    
     this.colorFill   = "rgb(150,000,30)"
     this.lineWidth   = "3";
-    
     this.color = "rgb(250,000,000)";
     this.x = x;
     this.y = y;    
     this.size = size;
     this.numSides = numSides;
-    this.rotateAngle = 0;
     this.opacity = 1;
-    
+    this.rotateAngle = 0; 
   }
   
   Polygon.prototype.update = function(){
@@ -80,6 +101,7 @@ var Primitive = Primitive || {};
   // exports 
   Primitive.Rectangle = Rectangle;
   Primitive.Polygon = Polygon;
+  Primitive.Circle = Circle;
 
 })( Primitive );
 
