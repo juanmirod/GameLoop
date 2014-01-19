@@ -30,11 +30,10 @@ if ( elem && elem.getContext ) {
     
     // Create a random Level: full the screen with primitives
     for(var i=0; i<50; i++){
-      game.assets.push(new Primitive.Polygon(
+      game.assets.push(new Primitive.Circle(
         Math.round(Math.random()*600), 
         Math.round(Math.random()*600), 
-        Math.round(Math.random()*20+5), 
-        Math.round(Math.random()*12+3)
+        Math.round(Math.random()*20+5)
       ));
     }
         
