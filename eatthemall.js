@@ -31,10 +31,10 @@ var Enemy = function(x, y, size){
 Enemy.prototype.updateColor = function(playerSize){
   if(this.shape.r > playerSize){
     this.shape.color = 'rgb(250, 10, 10)';
-    this.shape.fillColor = 'rgb(200, 10, 10)';
+    this.shape.colorFill = 'rgb(200, 10, 10)';
   } else {
     this.shape.color = 'rgb(10, 250, 10)';
-    this.shape.fillColor = 'rgb(10, 200, 10)';
+    this.shape.colorFill = 'rgb(10, 200, 10)';
   }
 }
 
@@ -97,6 +97,9 @@ if ( elem && elem.getContext ) {
       enemies = enemies.filter(function(enemy){ return enemy != null; });
       player.searchFood();
       enemies = enemies.filter(function(enemy){ return enemy != null; });
+      enemies.forEach(function(enemy){
+        enemy.updateColor(player.shape.r);
+      });
       game.assets = enemies.concat(player);
       
     }
