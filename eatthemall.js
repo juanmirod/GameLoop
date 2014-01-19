@@ -1,6 +1,7 @@
 // Get a reference to the element.
 var elem = document.getElementById('myCanvas'),
     enemies = [],
+    debug = 1,
     player;
 
 //TODO: put this in a separate module
@@ -80,8 +81,8 @@ if ( elem && elem.getContext ) {
     game.backgroundColor = '#150525';            
     player = new Enemy(10, 10, 10);
         
-    // Create a random Level: full the screen with primitives
-    for(var i=0; i<50; i++){
+    // Create a random Level: fill the screen with primitives
+    for(var i=0; i<100; i++){
       enemies.push(new Enemy(
         Math.round(Math.random()*500+50), 
         Math.round(Math.random()*500+50), 
