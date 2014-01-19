@@ -53,9 +53,9 @@ Enemy.prototype.searchFood = function(){
 }
 
 Enemy.prototype.collide = function(pal){
-  var dx = this.shape.x - pal.shape.x;
-  var dy = this.shape.y - pal.shape.y;
-  var dist = this.shape.r + pal.shape.r;
+  var dx = this.shape.x - pal.shape.x,
+      dy = this.shape.y - pal.shape.y,
+      dist = this.shape.r + pal.shape.r;
   
   return (this != pal)
     && (Math.abs(dx) < dist && Math.abs(dy) < dist) // this let us skip the multiplications if they are far away from each other
@@ -63,7 +63,9 @@ Enemy.prototype.collide = function(pal){
 }
 
 Enemy.prototype.eat = function(food){
-  this.shape.r += food.shape.r;
+  var areaFood = food.shape.r*food.shape.r*Math.PI,
+      areaThis = this.shape.r*this.shape.r*Math.PI;
+  this.shape.r = Math.sqrt((areaThis+areaFood)/Math.PI);
 }
 
 if ( elem && elem.getContext ) {
