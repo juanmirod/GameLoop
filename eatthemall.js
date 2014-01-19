@@ -1,21 +1,22 @@
 // Get a reference to the element.
 var elem = document.getElementById('myCanvas'),
-    enemies = [];
+    enemies = [],
+    player;
 
 //TODO: put this in a separate module
 document.addEventListener('keydown', function(event) {
   switch(event.keyCode){
     case 37:  // LEFT
-      map.camera.x+=5; 
+      player.shape.x -= 5;
       break;
     case 39: // RIGHT
-      map.camera.x-=5;
+      player.shape.x +=5;
       break;    
     case 38: // UP
-      map.camera.y+=5;
+      player.shape.y -=5;
       break;    
     case 40: // DOWN
-      map.camera.y-=5;
+      player.shape.y +=5;
       break;    
   }
 });
@@ -45,7 +46,6 @@ Enemy.prototype.searchFood = function(){
   var self = this;
   for(var i=0; i<enemies.length; i++){
     if(enemies[i] != null && self.collide(enemies[i])){
-      console.log('COLLIDE!!');
       self.eat(enemies[i]);
       enemies[i] = null;
     }  
@@ -76,6 +76,7 @@ if ( elem && elem.getContext ) {
     // Create new Game Object
     var game = new Game(elem.width, elem.height);
     game.backgroundColor = '#150525';            
+    player = new Enemy(10, 10, 10);
         
     // Create a random Level: full the screen with primitives
     for(var i=0; i<50; i++){
@@ -94,7 +95,10 @@ if ( elem && elem.getContext ) {
         enemies[i].searchFood();
       }
       enemies = enemies.filter(function(enemy){ return enemy != null; });
-      game.assets = enemies;
+      player.searchFood();
+      enemies = enemies.filter(function(enemy){ return enemy != null; });
+      game.assets = enemies.concat(player);
+      
     }
         
     loop(game, context);
