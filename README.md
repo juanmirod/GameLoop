@@ -2,7 +2,7 @@ GameLoop
 ========
 
 GameLoop is not a game framework with everything you need to create awesome and fancy games with particles and physics and all that stuff.
-GameLoop is just the bare-minimun helpers that *I* need to build a game in Canvas. GameLoop is currently under development at slow pace and just for fun.
+GameLoop is just the bare-minimun helpers that **I** need to build a game in Canvas. GameLoop is currently under development at slow pace and just for fun.
 
 In development / TODO:
 
