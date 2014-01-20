@@ -8,24 +8,27 @@ var elem = document.getElementById('myCanvas'),
 document.addEventListener('keydown', function(event) {
   switch(event.keyCode){
     case 37:  // LEFT
-      player.shape.x -= 5;
+      player.inertiaX -= Math.max(0.1, player.inertiaX*0.1);
       break;
     case 39: // RIGHT
-      player.shape.x +=5;
+      player.inertiaX += Math.max(0.1, player.inertiaX*0.1);
       break;    
     case 38: // UP
-      player.shape.y -=5;
+      player.inertiaY -= Math.max(0.1, player.inertiaY*0.1);
       break;    
     case 40: // DOWN
-      player.shape.y +=5;
+      player.inertiaY += Math.max(0.1, player.inertiaY*0.1);
       break;    
   }
+  console.log(player.inertiaX);
 });
 
 // An enemy is a circle that changes color accordingly to the user size
 // and its own size. It also can eat other enemies and the user
 var Enemy = function(x, y, size){
   this.shape = new Primitive.Circle(x, y, size);
+  this.inertiaX = 0;
+  this.inertiaY = 0;
   this.opacity = 1; //make it visible
 }
 
@@ -41,6 +44,11 @@ Enemy.prototype.updateColor = function(playerSize){
 
 Enemy.prototype.draw = function(ctx){
   this.shape.draw(ctx);
+}
+
+Enemy.prototype.updatePosition = function(){
+  this.shape.x += this.inertiaX;
+  this.shape.y += this.inertiaY;
 }
 
 Enemy.prototype.searchFood = function(){
@@ -94,6 +102,11 @@ if ( elem && elem.getContext ) {
         
     // overwrite update function to call collision detection
     game.update = function(){
+      for(var i=0; i < enemies.length; i++){
+        enemies[i].updatePosition();
+      }
+      player.updatePosition();
+      
       for(var i=0; i < enemies.length && enemies[i] != null; i++){
         enemies[i].searchFood();
       }
