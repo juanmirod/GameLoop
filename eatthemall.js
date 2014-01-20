@@ -1,7 +1,6 @@
 // Get a reference to the element.
 var elem = document.getElementById('myCanvas'),
     enemies = [],
-    debug = 1,
     player;
 
 //TODO: put this in a separate module
@@ -73,6 +72,19 @@ Enemy.prototype.searchFood = function(){
   }
 }
 
+Enemy.prototype.playerFood = function(){
+
+  if(this.collide(player)){
+    if(this.shape.r > player.shape.r){ 
+      this.eat(player);
+      if(player.shape.r <= 1){
+        console.log("GAME OVER");
+      }
+    }
+  }  
+  
+}
+
 Enemy.prototype.collide = function(pal){
   var dx = this.shape.x - pal.shape.x,
       dy = this.shape.y - pal.shape.y,
@@ -124,6 +136,7 @@ if ( elem && elem.getContext ) {
       
       for(var i=0; i < enemies.length && enemies[i] != null; i++){
         enemies[i].searchFood();
+        enemies[i].playerFood();
       }
       enemies = enemies.filter(function(enemy){ return enemy != null; });
       player.searchFood();
