@@ -46,9 +46,18 @@ Enemy.prototype.draw = function(ctx){
   this.shape.draw(ctx);
 }
 
-Enemy.prototype.updatePosition = function(){
+Enemy.prototype.updatePosition = function(screenWidth, screenHeight){
   this.shape.x += this.inertiaX;
+  if(this.shape.x+this.shape.r >= screenWidth 
+      || this.shape.x-this.shape.r <= 0){
+    this.inertiaX = -this.inertiaX;
+  }
+  
   this.shape.y += this.inertiaY;
+  if(this.shape.y+this.shape.r >= screenHeight 
+      || this.shape.y-this.shape.r <= 0){
+    this.inertiaY = -this.inertiaY;
+  }
 }
 
 Enemy.prototype.searchFood = function(){
@@ -106,9 +115,9 @@ if ( elem && elem.getContext ) {
     // overwrite update function to call collision detection
     game.update = function(){
       for(var i=0; i < enemies.length; i++){
-        enemies[i].updatePosition();
+        enemies[i].updatePosition(this.width, this.height);
       }
-      player.updatePosition();
+      player.updatePosition(this.width, this.height);
       
       for(var i=0; i < enemies.length && enemies[i] != null; i++){
         enemies[i].searchFood();
