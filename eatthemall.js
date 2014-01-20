@@ -91,11 +91,14 @@ if ( elem && elem.getContext ) {
         
     // Create a random Level: fill the screen with primitives
     for(var i=0; i<100; i++){
-      enemies.push(new Enemy(
+      var newEnemy = new Enemy(
         Math.round(Math.random()*500+50), 
         Math.round(Math.random()*500+50), 
         Math.round(Math.random()*20+5)
-      ));
+      );
+      newEnemy.inertiaX = Math.random()*0.05*(Math.random()>0.5? -1: 1);
+      newEnemy.inertiaY = Math.random()*0.05*(Math.random()>0.5? -1: 1);
+      enemies.push(newEnemy);
     }
     
     game.assets = enemies;
