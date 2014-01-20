@@ -66,7 +66,8 @@ Enemy.prototype.searchFood = function(){
     if(enemies[i] != null && self.collide(enemies[i])){
       if(self.shape.r > enemies[i].shape.r){ //don't eat things bigger than you!
         self.eat(enemies[i]);
-        enemies[i] = null;
+        if(enemies[i].shape.r <= 1)
+          enemies[i] = null;
       }
     }  
   }
@@ -85,7 +86,9 @@ Enemy.prototype.collide = function(pal){
 Enemy.prototype.eat = function(food){
   var areaFood = food.shape.r*food.shape.r*Math.PI,
       areaThis = this.shape.r*this.shape.r*Math.PI;
-  this.shape.r = Math.sqrt((areaThis+areaFood)/Math.PI);
+      
+  this.shape.r = Math.sqrt((areaThis+areaFood/10)/Math.PI);
+  food.shape.r = food.shape.r*9/10;
 }
 
 if ( elem && elem.getContext ) {
