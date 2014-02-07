@@ -49,13 +49,37 @@ var Primitive = Primitive || {};
       ctx.fillStyle = "red";
       ctx.fillRect(this.x-1, this.y-1, 2, 2);
     }
-  }    
+  } 
+  
+  // A Line is a wrapper over lineTo
+  Line = function(x, y, x2, y2) {
+    this.lineWidth = '3';
+    this.color = 'rgb(150,200,150)';
+    this.x = x;
+    this.y = y;    
+    this.x2 = x2;
+    this.y2 = y2;
+  }   
+  
+  Line.prototype.draw = function(ctx) {
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth   = this.lineWidth;
+    
+    ctx.beginPath();
+    
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x2, this.y2);
+    
+    if(this.lineWidth > 0){
+      ctx.stroke();
+    }
+  }
     
   // A Polygon is a closed path that draws a regular polygon of N sides
   Polygon = function(x, y, size, numSides) {
-    this.colorFill   = "rgb(200,250,200)"
-    this.lineWidth   = "3";
-    this.color = "rgb(150,200,150)";
+    this.colorFill   = 'rgb(200,250,200)';
+    this.lineWidth   = '3';
+    this.color = 'rgb(150,200,150)';
     this.x = x;
     this.y = y;    
     this.size = size;
