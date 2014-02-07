@@ -1,5 +1,10 @@
 /** Sprite Class
- *  Sprites are images that contain a character with animations 
+ *  SpritesSheets are images that contain a lot of individual game sprites
+ *  To load an Sprite you have to load the image and the json object that
+ *  give you the info about the individual images. Both, json and image are
+ *  generated from a group of individual images in game compilation.
+ *  You can also ignore the spritesheet and use folder_image_number to draw the
+ *  Sprite.
  */
 function Sprite(imageSrc){
   this.imageSrc = imageSrc;

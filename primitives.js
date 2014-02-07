@@ -2,7 +2,7 @@ var Primitive = Primitive || {};
 
 (function ( Primitive ) {
 
-  var Rectangle, Polygon;
+  var Rectangle, Polygon, Circle, Line;
   
   //private scope of this module
   function deg2rad(ang) {
@@ -125,6 +125,7 @@ var Primitive = Primitive || {};
   Primitive.Rectangle = Rectangle;
   Primitive.Polygon = Polygon;
   Primitive.Circle = Circle;
+  Primitive.Line = Line;
 
 })( Primitive );
 
