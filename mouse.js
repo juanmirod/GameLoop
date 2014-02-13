@@ -7,17 +7,17 @@ var Mouse = Mouse || {};
 
   var elem, init, on, off, dragCheckFunction;
 
-  function onMouseDownDrag(event){
+  onMouseDownDrag = function(event){
     this.isDragging = true;
   }
 
-  function onMoveCheckDragging(event, callback){
+  onMoveCheckDragging = function(event, callback){
     if(this.isDragging) {
-      callback.call(event); 
+      callback.call(this, event); 
     }
   }
 
-  function onMouseUpDrag(event){
+  onMouseUpDrag = function(event){
     this.isDragging = false;
   }
 
@@ -36,10 +36,13 @@ var Mouse = Mouse || {};
         break;
 
       case 'drag':
-        dragCheckFunction = function(event) { onMoveCheckDragging(event, callback); };
-        this.elem.addEventListener('mousedown', onMouseDownDrag);
-        this.elem.addEventListener('mousemove', dragCheckFunction);
-        this.elem.addEventListener('mouseup', onMouseUpDrag);
+        onMoveCheckDragging = onMoveCheckDragging.bind(this);          
+        dragCheckFunction = function(e) { 
+          onMoveCheckDragging(e, callback); 
+        };
+        this.elem.addEventListener('mousedown', onMouseDownDrag.bind(this));
+        this.elem.addEventListener('mousemove', dragCheckFunction.bind(this));
+        this.elem.addEventListener('mouseup', onMouseUpDrag.bind(this));
         break;
 
       case 'enter':
@@ -81,6 +84,6 @@ var Mouse = Mouse || {};
   Mouse.on = on;
   Mouse.off = off;
 
-}(Mouse);
+})(Mouse);
 
 if(window.debug != undefined) console.log("Mouse module loaded...");
