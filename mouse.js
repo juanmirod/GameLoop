@@ -5,7 +5,7 @@ var Mouse = Mouse || {};
 
 (function(Mouse) {
 
-  var elem, init, on, off;
+  var elem, init, on, off, dragCheckFunction;
 
   function onMouseDownDrag(event){
     this.isDragging = true;
@@ -36,8 +36,9 @@ var Mouse = Mouse || {};
         break;
 
       case 'drag':
+        dragCheckFunction = function(event) { onMoveCheckDragging(event, callback); };
         this.elem.addEventListener('mousedown', onMouseDownDrag);
-        this.elem.addEventListener('mousemove', function(event) { onMoveCheckDragging(event, callback); });
+        this.elem.addEventListener('mousemove', dragCheckFunction);
         this.elem.addEventListener('mouseup', onMouseUpDrag);
         break;
 
@@ -52,8 +53,33 @@ var Mouse = Mouse || {};
   }
 
   off = function(event) {
-    //TODO this.elem.removeEventListener();
+    switch(event) {
+      case 'click':
+        this.elem.removeEventListener('click', callback);
+        break;
+      case 'move':
+        this.elem.removeEventListener('mousemove', callback);
+        break;
+      case 'drag':
+        // This is not compatible with several objects attaching handlers to drag,
+        // I need to keep a track of the different calls and only dettach
+        // everything in the last one.
+        this.elem.removeEventListener('mousedown', onMouseDownDrag);
+        this.elem.removeEventListener('mousemove', dragCheckFunction);
+        this.elem.removeEventListener('mouseup', onMouseUpDrag);
+        break;
+      case 'enter':
+        this.elem.removeEventListener('mouseover', callback);
+        break;
+      case 'leave':
+        this.elem.removeEventListener('mouseout', callback);
+        break;
+    }    
   }
+
+  Mouse.init = init;
+  Mouse.on = on;
+  Mouse.off = off;
 
 }(Mouse);
 
