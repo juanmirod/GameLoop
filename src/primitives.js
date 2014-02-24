@@ -1,6 +1,4 @@
-var Primitive = Primitive || {};
-
-(function ( Primitive ) {
+define(function(require, exports, module) {
 
   var Rectangle, Polygon, Circle, Line;
   
@@ -121,12 +119,9 @@ var Primitive = Primitive || {};
     }
   }
   
-  // exports 
-  Primitive.Rectangle = Rectangle;
-  Primitive.Polygon = Polygon;
-  Primitive.Circle = Circle;
-  Primitive.Line = Line;
+  exports.Rectangle = Rectangle;
+  exports.Polygon = Polygon;
+  exports.Circle = Circle;
+  exports.Line = Line;
 
-})( Primitive );
-
-if(window.debug != undefined) console.log("Primitives loaded...");
+});
