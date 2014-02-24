@@ -56,11 +56,12 @@ Game.protype.addItemToState = function(item, state) {
   this.assets.state.push(item);
 }
 
-function loop(game, ctx){
-  game.checkState();
-  game.update();
-  game.draw(ctx);
-  requestAnimationFrame(function(){loop(game, ctx);});
+Game.prototype.loop = function(ctx){
+  this.checkState();
+  this.update();
+  this.draw(ctx);
+  var self = this;
+  requestAnimationFrame(function(){ self.loop(ctx); });
 }
 
 console.log("Game loaded...")
