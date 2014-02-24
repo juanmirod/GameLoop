@@ -1,22 +1,28 @@
 define(function(require, exports, module){
 
   // Game Class Definition 
-  function Game(width, height){
+  function Game(context, width, height){
     this.width  = width;
     this.height = height;
+    this.ctx = context;
     this.assets = {}; 
     this.states = [];
+    this.state = {
+      current: 'default',
+      finished: false
+    };
     this.backgroundColor = '#FAFAFA'
   }
 
   // This function draws every object that have been added to the Game in order
   // asset opacity can be set to 0 to hide the asset 
-  Game.prototype.draw = function(ctx){
-    ctx.fillStyle = this.backgroundColor;
-    ctx.fillRect(0, 0, this.width, this.height);  
+  Game.prototype.draw = function(){
+    this.ctx.fillStyle = this.backgroundColor;
+    this.ctx.fillRect(0, 0, this.width, this.height);  
     
+    var self = this;
     this.assets[this.state.current].forEach(function(asset){
-      if(asset.opacity > 0) asset.draw(ctx);
+      if(asset.opacity > 0) asset.draw(self.ctx);
     });
   }
 
@@ -49,21 +55,22 @@ define(function(require, exports, module){
     this.state.finished = false;
   }
 
-  Game.protype.addItemToState = function(item, state) {
+  Game.prototype.addItemToState = function(item, state) {
+    state = typeof state !== 'undefined' ? state : 'default';
     // Add an object to a game state, this object will be drawn and updated when the game is in this state
     if(this.assets[state] === undefined) {
       this.assets[state] = [];
     }
 
-    this.assets.state.push(item);
+    this.assets[state].push(item);
   }
 
-  Game.prototype.loop = function(ctx){
+  Game.prototype.loop = function(){
     this.checkState();
     this.update();
-    this.draw(ctx);
+    this.draw();
     var self = this;
-    requestAnimationFrame(function(){ self.loop(ctx); });
+    requestAnimationFrame(function(){ self.loop(); });
   }
 
   exports.Game = Game;

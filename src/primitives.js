@@ -83,6 +83,7 @@ define(function(require, exports, module) {
     this.size = size;
     this.numSides = numSides;
     this.rotateAngle = 0; 
+    this.opacity = 1;
   }
   
   Polygon.prototype.update = function(){
