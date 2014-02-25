@@ -4,9 +4,7 @@
   the tile palette. You can draw the tile map, move the camera and change tiles
   in the map. 
 */
-var TileMap = TileMap || {};
-
-(function ( Map ) {
+define(function(require, exports, module){
 
   var defaultTilePalette  = ['http://placehold.it/64/00dd00', 'http://placehold.it/64/aa6600'];
   var defaultTileWidth    = 64;
@@ -75,8 +73,6 @@ var TileMap = TileMap || {};
     },
   }
   
-  TileMap.Map = Map;
+  exports.Map = Map;
   
-})(TileMap);
-
-if(window.debug != undefined) console.log('TileMap loaded...');
+});

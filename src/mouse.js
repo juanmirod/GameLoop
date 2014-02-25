@@ -1,9 +1,6 @@
 // check this for alternative to bind: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener#The_value_of_this_within_the_handler
 // And this in how to remove all handlers for an event: http://jsfiddle.net/fksBW/
-
-var Mouse = Mouse || {};
-
-(function(Mouse) {
+define(function(require, exports, module) {
 
   var elem, init, on, off, dragCheckFunction;
 
@@ -80,10 +77,8 @@ var Mouse = Mouse || {};
     }    
   }
 
-  Mouse.init = init;
-  Mouse.on = on;
-  Mouse.off = off;
+  exports.init = init;
+  exports.on = on;
+  exports.off = off;
 
-})(Mouse);
-
-if(window.debug != undefined) console.log("Mouse module loaded...");
+});

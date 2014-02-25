@@ -6,7 +6,7 @@ requirejs.config({
 });
 
 
-requirejs(['polyfills','primitives', 'game'], function(p, Primitives, Game){
+requirejs(['polyfills','primitives', 'game'], function(p, Primitives, G){
 
   // Get a reference to the element.
   var elem = document.getElementById('myCanvas');
@@ -19,7 +19,7 @@ requirejs(['polyfills','primitives', 'game'], function(p, Primitives, Game){
     window.context = elem.getContext( '2d' );
     if ( context ) {
 
-      var game = new Game.Game(context, elem.width, elem.height);
+      var game = new G.Game(context, elem.width, elem.height);
 
       var p = new Primitives.Polygon(100, 100, 20, 5);
 
