@@ -6,7 +6,7 @@ requirejs.config({
 });
 
 
-requirejs(['polyfills','primitives', 'game'], function(p, Primitives, G){
+requirejs(['polyfills','primitives', 'mouse', 'game'], function(p, Primitives, Mouse, G){
 
   // Get a reference to the element.
   var elem = document.getElementById('myCanvas');
@@ -21,9 +21,21 @@ requirejs(['polyfills','primitives', 'game'], function(p, Primitives, G){
 
       var game = new G.Game(context, elem.width, elem.height);
 
-      var p = new Primitives.Polygon(100, 100, 20, 5);
+      game.addState('Play', true);
+      game.addState('GameOver');     
 
-      game.addItemToState(p);
+      var button = new Primitives.Rectangle(100, 100, 100, 50);
+      var gameOverText = new Primitives.Rectangle(100, 100, 100, 50);
+      gameOverText.color = '#00ff00';
+
+      game.addItemToState(button, 'Play');
+      game.addItemToState(gameOverText, 'GameOver');
+
+      Mouse.init(elem);
+      Mouse.on('click', function(){
+        game.setNextState('GameOver');
+        game.nextState();
+      });
 
       game.loop();
     }
