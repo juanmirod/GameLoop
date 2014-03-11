@@ -96,7 +96,7 @@ define(function(require, exports, module) {
     this.y = y;    
     this.size = size;
     this.numSides = numSides;
-    this.rotateAngle = 0; 
+    this.rotateAngle = 45; 
     this.opacity = 1;
   }
   

@@ -11,6 +11,7 @@ define(function(require, exports, module){
       current: 'default',
       finished: false
     };
+    this.assets[this.state.current] = [];
     this.backgroundColor = '#FAFAFA'
   }
 
