@@ -6,7 +6,7 @@ requirejs.config({
 });
 
 
-requirejs(['polyfills','primitives', 'game'], function(p, Primitives, G){
+requirejs(['polyfills','primitives', 'mouse', 'game'], function(p, Primitives, Mouse, G){
 
   // Get a reference to the element.
   var elem = document.getElementById('myCanvas');

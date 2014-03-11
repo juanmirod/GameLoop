@@ -35,6 +35,17 @@ define(function(require, exports, module){
     });
   }
 
+  Game.prototype.addState = function(newState, setAsCurrent){
+    setAsCurrent = typeof setAsCurrent !== 'undefined'? setAsCurrent : false; 
+    if(this.states.indexOf(newState) == -1) {
+      this.states.push(newState);
+      this.assets[newState] = [];
+      if(setAsCurrent) {
+        this.state.current = newState;
+      }
+    }
+  }
+
   Game.prototype.checkState = function(){
     // Check the state of the game and update to a new state if needed
     if(this.state.finished) {
@@ -42,13 +53,14 @@ define(function(require, exports, module){
     }  
   }
 
-  Game.prototype.setState = function(state) {
+  Game.prototype.setNextState = function(state) {
     // Change game state, waiting for the current state to finish
     this.state.next = state;
     this.checkState();
   }
 
   Game.prototype.nextState = function() {
+    // force next state transition
     this.state.old = this.state.current;
     this.state.current = this.state.next;
     this.state.next = null;
