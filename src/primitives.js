@@ -1,14 +1,28 @@
 define(function(require, exports, module) {
 
-  var Rectangle, Polygon, Circle, Line;
+  var Text, Rectangle, Polygon, Circle, Line;
   
   //private scope of this module
   function deg2rad(ang) {
       return ang * (Math.PI/180.0);
   }
+
+  // A Text object is an encapsulation of canvas.filltext and strokeText + font loading
+  Text = function (x, y, font) {
+    this.x = x;
+    this.y = y;
+    this.font = font;
+    this.opacity = 1;
+    this.color = '#333333';
+  }
+
+  Text.prototype.draw = function(ctx) {
+    ctx.fillStyle = this.color;
+    
+  }
   
   // A Rectangle is an encapsulation of the canvas.fill
-  Rectangle = function (x, y, width, height){
+  Rectangle = function (x, y, width, height) {
     this.color = "rgb(200,0,0)";
     this.x = x;
     this.y = y;

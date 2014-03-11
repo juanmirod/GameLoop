@@ -24,11 +24,11 @@ requirejs(['polyfills','primitives', 'mouse', 'game'], function(p, Primitives, M
       game.addState('Play', true);
       game.addState('GameOver');     
 
-      var button = new Primitives.Rectangle(100, 100, 100, 50);
+      var clickMeButton = new Primitives.Rectangle(100, 100, 100, 50);
       var gameOverText = new Primitives.Rectangle(100, 100, 100, 50);
       gameOverText.color = '#00ff00';
 
-      game.addItemToState(button, 'Play');
+      game.addItemToState(clickMeButton, 'Play');
       game.addItemToState(gameOverText, 'GameOver');
 
       Mouse.init(elem);
