@@ -21,10 +21,21 @@ requirejs(['polyfills','primitives', 'game'], function(p, Primitives, G){
 
       var game = new G.Game(context, elem.width, elem.height);
 
-      var p = new Primitives.Polygon(100, 100, 20, 5);
-
-      game.addItemToState(p);
-
+      document.addEventListener('keydown', function(event) {
+        // each time the user hits a key, draw a random polygon!
+        var p = new Primitives.Polygon(Math.random()*200, 
+                                       Math.random()*200, 
+                                       Math.random()*80, 
+                                       Math.random()*20
+                                       );
+        // give it a bright colour
+        p.color = 'rgb('+(Math.random()*100+150)+','+
+                       (Math.random()*100+150)+','+
+                       (Math.random()*100+150)+')';
+        // add it to the Loop
+        game.addItemToState(p);        
+      });
+      
       game.loop();
     }
     
