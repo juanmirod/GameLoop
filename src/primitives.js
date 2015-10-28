@@ -111,7 +111,7 @@ define(function(require, exports, module) {
     }
     ctx.fill();
     if(this.lineWidth > 0){
-      ctx.lineTo(this.points[0].x, this.points[0].y);        
+      ctx.closePath();        
       ctx.stroke();
     }
     if(window.debug != undefined){
